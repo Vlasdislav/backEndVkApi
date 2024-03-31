@@ -19,9 +19,12 @@ $data = json_decode(file_get_contents("php://input"));
 $user->email = $data->email;
 $user->password = $data->password;
 
+$password_strength = $user->checkPasswordStrength();
+
 if (
     !empty($user->email) &&
-    // $user->emailExists() == 0 &&
+    filter_var($user->email, FILTER_VALIDATE_EMAIL) &&
+    !$user->emailExists() &&
     !empty($user->password) &&
     $user->create()
 ) {
@@ -29,6 +32,7 @@ if (
     $res = [
         "status" => true,
         "user_id" => $db->lastInsertId(),
+        "password_check_status" => $password_strength,
         "message" => "Пользователь был создан"
     ];
     echo json_encode($res);

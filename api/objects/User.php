@@ -1,6 +1,6 @@
 <?php
 
-include_once(__DIR__ . '/../functions/isCommonPassword.php');
+include_once(__DIR__ . "/../functions/isCommonPassword.php");
 
 
 class User {
@@ -58,7 +58,11 @@ class User {
     function checkPasswordStrength() {
         if (strlen($this->password) < 8 ||
             isCommonPassword($this->conn, $this->password)) {
-            throw new Exception("weak_password");
+            http_response_code(400);
+            $res = [
+                "error" => "weak_password"
+            ];
+            echo json_encode($res);
         }
     
         $containsUpperCase = preg_match("/[A-Z]/", $this->password);
@@ -66,13 +70,13 @@ class User {
         $containsNumber = preg_match("/[0-9]/", $this->password);
     
         if ($containsUpperCase && $containsLowerCase && $containsNumber) {
-            return "strong";
+            return "perfect";
         } elseif ($containsUpperCase && $containsNumber ||
                 $containsUpperCase && $containsLowerCase ||
                 $containsLowerCase && $containsNumber) {
             return "good";
         } else {
-            return "weak";
+            return "almost_good";
         }
     }
 }

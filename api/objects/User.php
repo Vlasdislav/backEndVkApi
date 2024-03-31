@@ -64,19 +64,35 @@ class User {
             ];
             echo json_encode($res);
         }
+        
+        $contains = [
+            preg_match("/[A-Z]/", $this->password), // containsUpperCase
+            preg_match("/[a-z]/", $this->password), // containsLowerCase
+            preg_match("/[0-9]/", $this->password), // containsNumber
+            preg_match("/[^a-zA-Z0-9]/", $this->password) // containsSpecialChar
+
+        ];
     
-        $containsUpperCase = preg_match("/[A-Z]/", $this->password);
-        $containsLowerCase = preg_match("/[a-z]/", $this->password);
-        $containsNumber = preg_match("/[0-9]/", $this->password);
-    
-        if ($containsUpperCase && $containsLowerCase && $containsNumber) {
+        if ($contains[0] && $contains[1] && $contains[2] && $contains[3]) {
             return "perfect";
-        } elseif ($containsUpperCase && $containsNumber ||
-                $containsUpperCase && $containsLowerCase ||
-                $containsLowerCase && $containsNumber) {
+        } elseif ($contains[0] && $contains[1] && $contains[2] ||
+                    $contains[0] && $contains[1] && $contains[3] ||
+                    $contains[0] && $contains[2] && $contains[3] ||
+                    $contains[1] && $contains[2] && $contains[3]) {
             return "good";
-        } else {
+        } elseif ($contains[0] && $contains[1] ||
+                    $contains[0] && $contains[2] ||
+                    $contains[0] && $contains[3] ||
+                    $contains[1] && $contains[2] ||
+                    $contains[1] && $contains[3] ||
+                    $contains[2] && $contains[3]) {
             return "almost_good";
+        } else {
+            http_response_code(400);
+            $res = [
+                "error" => "weak_password"
+            ];
+            echo json_encode($res);
         }
     }
 }

@@ -6,19 +6,19 @@ header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
-include_once "../config/database.php";
-include_once "../objects/User.php";
+include_once "./config/database.php";
+include_once "./objects/User.php";
 
 $database = new DataBase();
 $db = $database->getConnection();
 
 $user = new User($db);
- 
+
 $data = json_decode(file_get_contents("php://input"));
 
 $user->email = $data->email;
 $user->password = $data->password;
- 
+
 if (
     !empty($user->email) &&
     // $user->emailExists() == 0 &&

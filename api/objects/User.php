@@ -12,9 +12,9 @@ class User {
         $this->conn = $db;
     }
 
-    public function create() {
-        $query = "INSERT INTO " . $this->table_name .
-                "SET
+    function create() {
+        $query = "INSERT INTO " . $this->table_name . "
+                SET
                     email    = :email,
                     password = :password";
         
@@ -25,9 +25,9 @@ class User {
 
         $stmt->bindParam(":email", $this->email);
 
-        $password_hash = password_hash($this->password);
-        $stmt->bindParam(":password", $this->password_hash);
-
+        $password_hash = password_hash($this->password, PASSWORD_BCRYPT);
+        $stmt->bindParam(":password", $password_hash);
+        
         return $stmt->execute();
     }
 

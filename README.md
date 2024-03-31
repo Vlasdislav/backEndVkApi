@@ -3,14 +3,14 @@
 
 ## /register
 #### http://budru.com.ru/backEndVkApi/api/register.php
-### Входные данные
+#### Входные данные
 ```json
 {
     "email": "vladik@mail.ru",
     "password": "ko@9817hy8u"
 }
 ```
-### Выходные данные
+#### Выходные данные
 ```json
 {
     "status": true,
@@ -22,14 +22,14 @@
 
 ## /authorize
 #### http://budru.com.ru/backEndVkApi/api/authorize.php
-### Входные данные
+#### Входные данные
 ```json
 {
     "email": "vladik@mail.ru",
     "password": "ko@9817hy8u"
 }
 ```
-### Выходные данные
+#### Выходные данные
 ```json
 {
     "status": true,
@@ -61,4 +61,4 @@
 
 ## Проверка надежности пароля
 Для проверки пароля на подбор, использовалась большая таблица популярных паролей (всего 486976).
-![Image alt](https://github.com/Vlasdislav/backEndVkApi/raw/main/README/common_passwords.jpg)
+<center>![table_common_password](https://github.com/Vlasdislav/backEndVkApi/raw/main/README/common_passwords.jpg)</center>

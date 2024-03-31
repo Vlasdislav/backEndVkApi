@@ -61,5 +61,5 @@
 
 ## Проверка надежности пароля
 Для проверки пароля на подбор, использовалась большая таблица популярных паролей (всего 486976).
-</br>
+<p></p>
 ![table_common_password](https://github.com/Vlasdislav/backEndVkApi/raw/main/README/common_passwords.jpg)

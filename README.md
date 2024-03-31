@@ -58,3 +58,7 @@
     "message": "Доступ разрешен"
 }
 ```
+
+## Проверка надежности пароля
+Для проверки пароля на подбор использовалась большая таблица популярных паролей (всего 486976).
+![Image alt](https://github.com/Vlasdislav/backEndVkApi/raw/master/README/common_passwords.jpg)

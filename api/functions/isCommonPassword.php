@@ -1,10 +1,9 @@
 <?php
 
-$table_name = "common_passwords";
 
 function isCommonPassword($conn, $password) {
     $query = "SELECT id, password
-                FROM $table_name
+                FROM `common_passwords`
                 WHERE password = $password
                 LIMIT 0,1";
 
